@@ -2,11 +2,11 @@ import requests
 import time
 
 def get_sales_listings(api_key, page_limit=5, delay=1):
-    url = "https://streeteasy-api.p.rapidapi.com/sales/search"
+    url = "https://nyc-real-estate-api.p.rapidapi.com/sales/search"
     
     headers = {
         "X-RapidAPI-Key": api_key,
-        "X-RapidAPI-Host": "streeteasy-api.p.rapidapi.com"
+        "X-RapidAPI-Host": "nyc-real-estate-api.p.rapidapi.com"
     }
 
     all_sales = []
@@ -47,16 +47,16 @@ def get_sales_listings(api_key, page_limit=5, delay=1):
 def get_sales_details(api_key, sale_id):
     headers = {
         "X-RapidAPI-Key": api_key,
-        "X-RapidAPI-Host": "streeteasy-api.p.rapidapi.com"
+        "X-RapidAPI-Host": "nyc-real-estate-api.p.rapidapi.com"
     }
 
-    details = requests.get(f"https://streeteasy-api.p.rapidapi.com/sales/{sale_id}", headers=headers)
+    details = requests.get(f"https://nyc-real-estate-api.p.rapidapi.com/sales/{sale_id}", headers=headers)
     
     if details.status_code != 200:
         print(f"Details request failed for sale ID {sale_id} with status code {details.status_code}")
         return None
     
-    rental_price = requests.get(f"https://streeteasy-api.p.rapidapi.com/sales/estimate/rent/1741373", headers=headers)
+    rental_price = requests.get(f"https://nyc-real-estate-api.p.rapidapi.com/sales/estimate/rent/1741373", headers=headers)
     if (rental_price.status_code != 200):
         print(rental_price.text)
         print(f"Rental price prediction request failed for sale ID {sale_id} with status code {rental_price.status_code}")
